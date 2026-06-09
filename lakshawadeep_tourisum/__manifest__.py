@@ -1,0 +1,19 @@
+{
+    'name': 'Lakshadweep Tourism',
+    'version': '18.0.1.0.0',
+    'summary': 'Manage Tourism Bookings, Packages and Customer Orders',
+    'category': 'Travel & Tourism',
+    'author': 'ATEES Technologies',
+    'depends': ['base'],
+    'data': [
+        'security/ir.model.access.csv',
+        'views/view_tour_resort_form.xml',
+        'views/view_tour_island.xml',
+        'views/tour_beach_homestay_view.xml',
+        'views/tour_water_sport_view.xml',
+        'views/tour_homestay_view.xml',
+
+    ],
+    'installable': True,
+    'application': True,
+}

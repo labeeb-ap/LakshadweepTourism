@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tour_island_user,tour.island.user,model_tour_island,base.group_user,1,1,1,1
+access_tour_resort_user,tour.resort.user,model_tour_resort,base.group_user,1,1,1,1
+access_tour_resort_booking_user,tour.resort.booking.user,model_tour_resort_booking,base.group_user,1,1,1,1
+access_tour_beach_homestay_user,tour.beach.homestay.user,model_tour_beach_homestay,base.group_user,1,1,1,1
+access_tour_beach_homestay_booking_user,tour.beach.homestay.booking.user,model_tour_beach_homestay_booking,base.group_user,1,1,1,1
+access_tour_water_sport_user,tour.water.sport.user,model_tour_water_sport,base.group_user,1,1,1,1
+access_tour_water_sport_booking_user,tour.water.sport.booking.user,model_tour_water_sport_booking,base.group_user,1,1,1,1
+access_tour_homestay_user,tour.homestay.user,model_tour_homestay,base.group_user,1,1,1,1
+access_tour_homestay_booking_user,tour.homestay.booking.user,model_tour_homestay_booking,base.group_user,1,1,1,1

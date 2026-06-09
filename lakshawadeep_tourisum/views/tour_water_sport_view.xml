@@ -1,0 +1,141 @@
+<odoo>
+
+    <record id="view_water_sport_form" model="ir.ui.view">
+        <field name="name">tour.water.sport.form</field>
+        <field name="model">tour.water.sport</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="island_id"/>
+                            <field name="vendor_id"
+                                   options="{'no_create': True, 'no_create_edit': True}"/>
+                            <field name="image" widget="image"/>
+                        </group>
+
+                        <group>
+                            <field name="price"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+
+                    <field name="description"/>
+
+                    <notebook>
+
+                        <page string="Bookings">
+
+                            <field name="booking_ids">
+
+                                <list>
+                                    <field name="booking_no"/>
+                                    <field name="customer_id"/>
+                                    <field name="booking_date"/>
+                                    <field name="participants"/>
+                                    <field name="amount"/>
+                                    <field name="state"/>
+                                </list>
+
+                                <form>
+                                    <sheet>
+                                        <group>
+                                            <field name="booking_no" readonly="1"/>
+                                            <field name="customer_id"/>
+                                            <field name="booking_date"/>
+                                            <field name="participants"/>
+                                            <field name="amount"/>
+                                            <field name="state"/>
+                                        </group>
+                                    </sheet>
+                                </form>
+
+                            </field>
+
+                        </page>
+
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_water_sport_list" model="ir.ui.view">
+        <field name="name">tour.water.sport.list</field>
+        <field name="model">tour.water.sport</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="island_id"/>
+                <field name="vendor_id"/>
+                <field name="price"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_water_sport_kanban" model="ir.ui.view">
+        <field name="name">tour.water.sport.kanban</field>
+        <field name="model">tour.water.sport</field>
+        <field name="arch" type="xml">
+            <kanban>
+
+                <field name="name"/>
+                <field name="image"/>
+                <field name="island_id"/>
+                <field name="price"/>
+
+                <templates>
+                    <t t-name="card">
+
+                        <div class="oe_kanban_global_click">
+
+                            <field name="image"
+                                   widget="image"
+                                   class="oe_kanban_avatar"/>
+
+                            <div class="mt-2">
+                                <strong>
+                                    <field name="name"/>
+                                </strong>
+                            </div>
+
+                            <div>
+                                <field name="island_id"/>
+                            </div>
+
+                            <div>
+                                ₹ <field name="price"/>
+                            </div>
+
+                        </div>
+
+                    </t>
+                </templates>
+
+            </kanban>
+        </field>
+    </record>
+
+    <record id="seq_water_sport_booking" model="ir.sequence">
+        <field name="name">Water Sport Booking</field>
+        <field name="code">tour.water.sport.booking</field>
+        <field name="prefix">WSB/</field>
+        <field name="padding">5</field>
+    </record>
+
+    <record id="action_water_sport" model="ir.actions.act_window">
+        <field name="name">Water Sports</field>
+        <field name="res_model">tour.water.sport</field>
+        <field name="view_mode">kanban,list,form</field>
+    </record>
+
+    <menuitem id="menu_water_sport"
+              name="Water Sports"
+              action="action_water_sport"
+              sequence="30"/>
+
+</odoo>

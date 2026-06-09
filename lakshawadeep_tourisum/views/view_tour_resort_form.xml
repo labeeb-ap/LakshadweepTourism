@@ -1,0 +1,137 @@
+<odoo>
+    <record id="view_tour_resort_form" model="ir.ui.view">
+        <field name="name">tour.resort.form</field>
+        <field name="model">tour.resort</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+
+                    <group>
+                        <group>
+
+                            <field name="name"/>
+                            <field name="island_id"/>
+                            <field name="vendor_id"
+                                   options="{'no_create': True, 'no_create_edit': True}"/>
+                            <field name="image" widget="image"/>
+                        </group>
+
+                        <group>
+                            <field name="room_count"/>
+                            <field name="price_per_night"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+
+                    <field name="description"/>
+
+                    <notebook>
+
+                        <page string="Details">
+                            <group>
+                                <field name="checkin_time"/>
+                                <field name="checkout_time"/>
+                            </group>
+                        </page>
+
+                        <page string="Bookings">
+
+                            <field name="booking_ids">
+
+                                <list>
+                                    <field name="booking_no"/>
+                                    <field name="customer_id"/>
+                                    <field name="checkin_date"/>
+                                    <field name="room_count"/>
+                                    <field name="amount"/>
+                                    <field name="state"/>
+                                </list>
+
+                                <form>
+                                    <sheet>
+                                        <group>
+                                            <field name="booking_no" readonly="1"/>
+                                            <field name="customer_id"/>
+                                            <field name="checkin_date"/>
+                                            <field name="room_count"/>
+                                            <field name="amount"/>
+                                            <field name="state"/>
+                                        </group>
+                                    </sheet>
+                                </form>
+
+                            </field>
+
+                        </page>
+
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_tour_resort_list" model="ir.ui.view">
+        <field name="name">tour.resort.list</field>
+        <field name="model">tour.resort</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="island_id"/>
+                <field name="vendor_id"/>
+                <field name="room_count"/>
+                <field name="price_per_night"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+
+    <record id="view_tour_resort_kanban" model="ir.ui.view">
+        <field name="name">tour.resort.kanban</field>
+        <field name="model">tour.resort</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"/>
+                <field name="image"/>
+                <field name="island_id"/>
+                <field name="price_per_night"/>
+
+                <templates>
+                    <t t-name="card">
+                        <div class="oe_kanban_global_click">
+
+                            <field name="image"
+                                   widget="image"
+                                   class="oe_kanban_avatar"/>
+
+                            <div class="mt-2">
+                                <strong>
+                                    <field name="name"/>
+                                </strong>
+                            </div>
+
+                            <div>
+                                <field name="island_id"/>
+                            </div>
+
+                            <div>
+                                ₹
+                                <field name="price_per_night"/>
+                            </div>
+
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <record id="action_tour_resort" model="ir.actions.act_window">
+        <field name="name">Resorts</field>
+        <field name="res_model">tour.resort</field>
+        <field name="view_mode">kanban,list,form</field>
+    </record>
+    <menuitem id="menu_tour_resort"
+              name="Resorts"
+              action="action_tour_resort"
+              sequence="10"/>
+</odoo>

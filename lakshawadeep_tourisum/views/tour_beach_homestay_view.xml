@@ -1,0 +1,155 @@
+<odoo>
+
+    <!-- FORM -->
+
+    <record id="view_beach_homestay_form" model="ir.ui.view">
+        <field name="name">tour.beach.homestay.form</field>
+        <field name="model">tour.beach.homestay</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="island_id"/>
+                            <field name="vendor_id"
+                                   options="{'no_create': True, 'no_create_edit': True}"/>
+                            <field name="image" widget="image"/>
+                        </group>
+
+                        <group>
+                            <field name="rating"/>
+                            <field name="reviews"/>
+                            <field name="price_per_night"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+
+                    <field name="description"/>
+
+                    <notebook>
+
+                        <page string="Bookings">
+
+                            <field name="booking_ids">
+
+                                <list>
+                                    <field name="booking_no"/>
+                                    <field name="customer_id"/>
+                                    <field name="checkin_date"/>
+                                    <field name="room_count"/>
+                                    <field name="amount"/>
+                                    <field name="state"/>
+                                </list>
+
+                                <form>
+                                    <sheet>
+                                        <group>
+                                            <field name="booking_no" readonly="1"/>
+                                            <field name="customer_id"/>
+                                            <field name="checkin_date"/>
+                                            <field name="room_count"/>
+                                            <field name="amount"/>
+                                            <field name="state"/>
+                                        </group>
+                                    </sheet>
+                                </form>
+
+                            </field>
+
+                        </page>
+
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- LIST -->
+
+    <record id="view_beach_homestay_list" model="ir.ui.view">
+        <field name="name">tour.beach.homestay.list</field>
+        <field name="model">tour.beach.homestay</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="island_id"/>
+                <field name="vendor_id"/>
+                <field name="rating"/>
+                <field name="price_per_night"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- KANBAN -->
+
+    <record id="view_beach_homestay_kanban" model="ir.ui.view">
+        <field name="name">tour.beach.homestay.kanban</field>
+        <field name="model">tour.beach.homestay</field>
+        <field name="arch" type="xml">
+            <kanban>
+
+                <field name="name"/>
+                <field name="image"/>
+                <field name="island_id"/>
+                <field name="price_per_night"/>
+
+                <templates>
+                    <t t-name="card">
+
+                        <div class="oe_kanban_global_click">
+
+                            <field name="image"
+                                   widget="image"
+                                   class="oe_kanban_avatar"/>
+
+                            <div class="mt-2">
+                                <strong>
+                                    <field name="name"/>
+                                </strong>
+                            </div>
+
+                            <div>
+                                <field name="island_id"/>
+                            </div>
+
+                            <div>
+                                ₹
+                                <field name="price_per_night"/>
+                            </div>
+
+                        </div>
+
+                    </t>
+                </templates>
+
+            </kanban>
+        </field>
+    </record>
+
+    <record id="seq_beach_homestay_booking" model="ir.sequence">
+        <field name="name">Beach Homestay Booking</field>
+        <field name="code">tour.beach.homestay.booking</field>
+        <field name="prefix">BHB/</field>
+        <field name="padding">5</field>
+    </record>
+
+    <!-- ACTION -->
+
+    <record id="action_beach_homestay" model="ir.actions.act_window">
+        <field name="name">Beach Homestays</field>
+        <field name="res_model">tour.beach.homestay</field>
+        <field name="view_mode">kanban,list,form</field>
+    </record>
+
+    <!-- MENU -->
+
+    <menuitem id="menu_beach_homestay"
+              name="Beach Homestays"
+              action="action_beach_homestay"
+              sequence="20"/>
+
+</odoo>
