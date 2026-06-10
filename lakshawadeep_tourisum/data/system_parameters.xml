@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <record id="jwt_secret_param" model="ir.config_parameter">
+        <field name="key">jwt.secret</field>
+        <field name="value">CHANGE_ME_IN_PRODUCTION</field>
+    </record>
+
+    <record id="jwt_algorithm_param" model="ir.config_parameter">
+        <field name="key">jwt.algorithm</field>
+        <field name="value">HS256</field>
+    </record>
+
+    <record id="jwt_expiry_param" model="ir.config_parameter">
+        <field name="key">jwt.expiry_days</field>
+        <field name="value">30</field>
+    </record>
+
+</odoo>

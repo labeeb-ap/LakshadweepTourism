@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <record id="tour_island_agatti" model="tour.island">
+        <field name="name">Agatti</field>
+        <field name="description">
+            Agatti Island is known for its stunning lagoon, white sandy beaches,
+            and water sports activities.
+        </field>
+        <field name="code">1</field>
+        <field name="active">True</field>
+    </record>
+
+    <record id="tour_island_kavaratti" model="tour.island">
+        <field name="name">Kavaratti</field>
+        <field name="description">
+            Kavaratti is the capital of Lakshadweep and offers beautiful beaches,
+            marine life, and cultural attractions.
+        </field>
+        <field name="code">2</field>
+        <field name="active">True</field>
+    </record>
+
+    <record id="tour_island_kalpeni" model="tour.island">
+        <field name="name">Kalpeni</field>
+        <field name="description">
+            Kalpeni Island is famous for coral reefs, crystal-clear waters,
+            and peaceful surroundings.
+        </field>
+        <field name="code">3</field>
+        <field name="active">True</field>
+    </record>
+
+    <record id="tour_island_kadamath" model="tour.island">
+        <field name="name">Kadamath</field>
+        <field name="description">
+            Kadamath Island is a popular destination for diving, snorkeling,
+            and experiencing marine biodiversity.
+        </field>
+        <field name="code">4</field>
+        <field name="active">True</field>
+    </record>
+
+</odoo>

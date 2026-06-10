@@ -1,0 +1,148 @@
+<odoo>
+
+    <!-- LIST -->
+
+    <record id="view_tour_shop_list" model="ir.ui.view">
+        <field name="name">tour.shop.list</field>
+        <field name="model">tour.shop</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="island_id"/>
+                <field name="vendor_id"/>
+                <field name="category"/>
+                <field name="rating"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- FORM -->
+
+    <record id="view_tour_shop_form" model="ir.ui.view">
+        <field name="name">tour.shop.form</field>
+        <field name="model">tour.shop</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="island_id"/>
+                            <field name="vendor_id"
+                                   options="{'no_create': True, 'no_create_edit': True}"/>
+                            <field name="image" widget="image"/>
+                        </group>
+
+                        <group>
+                            <field name="category"/>
+                            <field name="rating"/>
+                            <field name="reviews"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+
+                    <field name="description"/>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- KANBAN -->
+
+    <record id="view_tour_shop_kanban" model="ir.ui.view">
+        <field name="name">tour.shop.kanban</field>
+        <field name="model">tour.shop</field>
+        <field name="arch" type="xml">
+            <kanban>
+
+                <field name="name"/>
+                <field name="image"/>
+                <field name="category"/>
+                <field name="rating"/>
+
+                <templates>
+                    <t t-name="card">
+
+                        <div class="oe_kanban_global_click">
+
+                            <field name="image"
+                                   widget="image"
+                                   class="oe_kanban_avatar"/>
+
+                            <div class="mt-2">
+                                <strong>
+                                    <field name="name"/>
+                                </strong>
+                            </div>
+
+                            <div>
+                                <field name="category"/>
+                            </div>
+
+                            <div>
+                                Rating :
+                                <field name="rating"/>
+                            </div>
+
+                        </div>
+
+                    </t>
+                </templates>
+
+            </kanban>
+        </field>
+    </record>
+
+    <!-- SEARCH -->
+
+    <record id="view_tour_shop_search" model="ir.ui.view">
+        <field name="name">tour.shop.search</field>
+        <field name="model">tour.shop</field>
+        <field name="arch" type="xml">
+            <search>
+
+                <field name="name"/>
+                <field name="category"/>
+                <field name="island_id"/>
+                <field name="vendor_id"/>
+
+                <group string="Group By">
+
+                    <filter name="group_island"
+                            string="Island"
+                            context="{'group_by':'island_id'}"/>
+
+                    <filter name="group_category"
+                            string="Category"
+                            context="{'group_by':'category'}"/>
+
+                    <filter name="group_vendor"
+                            string="Vendor"
+                            context="{'group_by':'vendor_id'}"/>
+
+                </group>
+
+            </search>
+        </field>
+    </record>
+
+    <!-- ACTION -->
+
+    <record id="action_tour_shop" model="ir.actions.act_window">
+        <field name="name">Local Shops</field>
+        <field name="res_model">tour.shop</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="search_view_id" ref="view_tour_shop_search"/>
+    </record>
+
+    <!-- MENU -->
+
+    <menuitem id="menu_tour_shop"
+              name="Local Shops"
+              action="action_tour_shop"
+              sequence="60"/>
+
+</odoo>

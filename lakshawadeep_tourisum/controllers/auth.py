@@ -1,5 +1,13 @@
+import logging
+import jwt
+
+from datetime import datetime, timedelta, timezone
+
 from odoo import http
 from odoo.http import request
+
+
+_logger = logging.getLogger(__name__)
 
 
 class AuthController(http.Controller):
@@ -70,7 +78,7 @@ class AuthController(http.Controller):
 
         return {
             'success': True,
-            'message': 'Registration successful1',
+            'message': 'Registration successful',
             'data': {
                 'id': user.id,
                 'name': user.name,
@@ -115,7 +123,8 @@ class AuthController(http.Controller):
 
             uid = auth_result.get('uid')
 
-        except Exception:
+        except Exception as e:
+            _logger.error("Authentication Error: %s", e)
             uid = False
 
         if not uid:
@@ -126,9 +135,46 @@ class AuthController(http.Controller):
 
         user = request.env['res.users'].sudo().browse(uid)
 
-        return {
+        # Read JWT settings from System Parameters
+        config = request.env['ir.config_parameter'].sudo()
+
+        jwt_secret = config.get_param('jwt.secret')
+        jwt_algorithm = config.get_param(
+            'jwt.algorithm',
+            default='HS256'
+        )
+        jwt_expiry_days = int(
+            config.get_param(
+                'jwt.expiry_days',
+                default='30'
+            )
+        )
+
+        if not jwt_secret:
+            return {
+                'success': False,
+                'message': 'JWT secret is not configured'
+            }
+
+        payload = {
+            'uid': user.id,
+            'email': user.email,
+            'login': user.login,
+            'exp': datetime.now(timezone.utc) + timedelta(
+                days=jwt_expiry_days
+            )
+        }
+
+        token = jwt.encode(
+            payload,
+            jwt_secret,
+            algorithm=jwt_algorithm
+        )
+
+        response = {
             'success': True,
             'message': 'Login successful',
+            'token': token,
             'data': {
                 'id': user.id,
                 'name': user.name,
@@ -136,3 +182,8 @@ class AuthController(http.Controller):
                 'phone': user.phone,
             }
         }
+
+        _logger.info("LOGIN RESPONSE: %s", response)
+
+        return response
+

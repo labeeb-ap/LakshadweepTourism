@@ -7,11 +7,17 @@
     'depends': ['base'],
     'data': [
         'security/ir.model.access.csv',
+        'data/island_data.xml',
+        'data/system_parameters.xml',
         'views/view_tour_resort_form.xml',
         'views/view_tour_island.xml',
         'views/tour_beach_homestay_view.xml',
         'views/tour_water_sport_view.xml',
         'views/tour_homestay_view.xml',
+        'views/tour_shop_view.xml',
+        'views/tour_taxi_view.xml',
+        'views/tour_restaurant_view.xml',
+        'views/tour_package_view.xml',
 
     ],
     'installable': True,

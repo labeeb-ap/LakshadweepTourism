@@ -1,0 +1,170 @@
+<odoo>
+
+    <!-- FORM -->
+
+    <record id="view_tour_taxi_form" model="ir.ui.view">
+        <field name="name">tour.taxi.form</field>
+        <field name="model">tour.taxi</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="island_id"/>
+                            <field name="vendor_id"
+                                   options="{'no_create': True, 'no_create_edit': True}"/>
+                            <field name="image" widget="image"/>
+                        </group>
+
+                        <group>
+                            <field name="vehicle_type"/>
+                            <field name="seater"/>
+                            <field name="ac"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+
+                    <field name="description"/>
+
+                    <notebook>
+
+                        <page string="Bookings">
+
+                            <field name="booking_ids">
+
+                                <list>
+                                    <field name="booking_no"/>
+                                    <field name="customer_id"/>
+                                    <field name="booking_date"/>
+                                    <field name="pickup_location"/>
+                                    <field name="drop_location"/>
+                                    <field name="passengers"/>
+                                    <field name="amount"/>
+                                    <field name="state"/>
+                                </list>
+
+                                <form>
+                                    <sheet>
+
+                                        <group>
+                                            <field name="booking_no" readonly="1"/>
+                                            <field name="customer_id"/>
+                                            <field name="booking_date"/>
+                                        </group>
+
+                                        <group>
+                                            <field name="pickup_location"/>
+                                            <field name="drop_location"/>
+                                            <field name="passengers"/>
+                                        </group>
+
+                                        <group>
+                                            <field name="amount"/>
+                                            <field name="state"/>
+                                        </group>
+
+                                    </sheet>
+                                </form>
+
+                            </field>
+
+                        </page>
+
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- LIST -->
+
+    <record id="view_tour_taxi_list" model="ir.ui.view">
+        <field name="name">tour.taxi.list</field>
+        <field name="model">tour.taxi</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="island_id"/>
+                <field name="vendor_id"/>
+                <field name="vehicle_type"/>
+                <field name="seater"/>
+                <field name="ac"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- KANBAN -->
+
+    <record id="view_tour_taxi_kanban" model="ir.ui.view">
+        <field name="name">tour.taxi.kanban</field>
+        <field name="model">tour.taxi</field>
+        <field name="arch" type="xml">
+            <kanban>
+
+                <field name="name"/>
+                <field name="image"/>
+                <field name="vehicle_type"/>
+                <field name="seater"/>
+
+                <templates>
+                    <t t-name="card">
+
+                        <div class="oe_kanban_global_click">
+
+                            <field name="image"
+                                   widget="image"
+                                   class="oe_kanban_avatar"/>
+
+                            <div>
+                                <strong>
+                                    <field name="name"/>
+                                </strong>
+                            </div>
+
+                            <div>
+                                <field name="vehicle_type"/>
+                            </div>
+
+                            <div>
+                                Seats :
+                                <field name="seater"/>
+                            </div>
+
+                        </div>
+
+                    </t>
+                </templates>
+
+            </kanban>
+        </field>
+    </record>
+
+    <!-- SEQUENCE -->
+
+    <record id="seq_taxi_booking" model="ir.sequence">
+        <field name="name">Taxi Booking</field>
+        <field name="code">tour.taxi.booking</field>
+        <field name="prefix">TXB/</field>
+        <field name="padding">5</field>
+    </record>
+
+    <!-- ACTION -->
+
+    <record id="action_tour_taxi" model="ir.actions.act_window">
+        <field name="name">Taxi Services</field>
+        <field name="res_model">tour.taxi</field>
+        <field name="view_mode">kanban,list,form</field>
+    </record>
+
+    <!-- MENU -->
+
+    <menuitem id="menu_tour_taxi"
+              name="Taxi Services"
+              action="action_tour_taxi"
+              sequence="50"/>
+
+</odoo>
