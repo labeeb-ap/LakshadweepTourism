@@ -104,7 +104,7 @@
 
                             <field name="image"
                                    widget="image"
-                                   class="oe_kanban_avatar"/>
+                                   options="{'img_class': 'w-100 object-fit-contain'}"/>
 
                             <div class="mt-2">
                                 <strong>
