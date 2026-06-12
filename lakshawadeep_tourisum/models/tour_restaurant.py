@@ -44,10 +44,6 @@ class TourRestaurant(models.Model):
         string='Cuisines'
     )
 
-    rating = fields.Float()
-
-    reviews = fields.Integer()
-
     description = fields.Text()
 
     active = fields.Boolean(

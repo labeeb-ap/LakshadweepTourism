@@ -30,9 +30,6 @@ class TourShop(models.Model):
         string='Category'
     )
 
-    rating = fields.Float()
-
-    reviews = fields.Integer()
 
     description = fields.Text()
 

@@ -8,6 +8,8 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
+                    <field name="image" widget="image" class="oe_avatar"/>
+
 
                     <group>
                         <group>
@@ -15,12 +17,10 @@
                             <field name="island_id"/>
                             <field name="vendor_id"
                                    options="{'no_create': True, 'no_create_edit': True}"/>
-                            <field name="image" widget="image"/>
                         </group>
 
                         <group>
-                            <field name="rating"/>
-                            <field name="reviews"/>
+
                             <field name="price_per_night"/>
                             <field name="active"/>
                         </group>
@@ -77,7 +77,6 @@
                 <field name="name"/>
                 <field name="island_id"/>
                 <field name="vendor_id"/>
-                <field name="rating"/>
                 <field name="price_per_night"/>
                 <field name="active"/>
             </list>
@@ -90,45 +89,52 @@
         <field name="name">tour.homestay.kanban</field>
         <field name="model">tour.homestay</field>
         <field name="arch" type="xml">
-            <kanban>
-
+            <kanban sample="1">
                 <field name="name"/>
                 <field name="image"/>
                 <field name="island_id"/>
+                <field name="vendor_id"/>
                 <field name="price_per_night"/>
 
                 <templates>
-                    <t t-name="card">
+                    <t t-name="card" class="flex-row">
 
-                        <div class="oe_kanban_global_click">
-
+                        <aside class="o_kanban_aside_full">
                             <field name="image"
-                                   widget="image"
-                                   options="{'img_class': 'w-100 object-fit-contain'}"/>
+                                   widget="background_image"
+                                   class="d-block position-relative"/>
+                        </aside>
 
-                            <div class="mt-2">
-                                <strong>
-                                    <field name="name"/>
-                                </strong>
+                        <main class="ms-2">
+
+                            <div class="fw-bold fs-5">
+                                <field name="name"/>
                             </div>
 
                             <div>
+                                <i class="fa fa-map-marker me-2"/>
                                 <field name="island_id"/>
                             </div>
 
                             <div>
-                                ₹ <field name="price_per_night"/>
+                                <i class="fa fa-building me-2"/>
+                                <field name="vendor_id"/>
                             </div>
 
-                        </div>
+                            <div>
+                                <i class="fa fa-money me-2"/>
+                                ₹
+                                <field name="price_per_night"/>
+                                / Night
+                            </div>
+
+                        </main>
 
                     </t>
                 </templates>
-
             </kanban>
         </field>
     </record>
-
     <!-- BOOKING SEQUENCE -->
 
     <record id="seq_homestay_booking" model="ir.sequence">

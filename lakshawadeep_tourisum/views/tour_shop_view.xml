@@ -11,7 +11,7 @@
                 <field name="island_id"/>
                 <field name="vendor_id"/>
                 <field name="category"/>
-                <field name="rating"/>
+
                 <field name="active"/>
             </list>
         </field>
@@ -25,6 +25,8 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
+                    <field name="image" widget="image" class="oe_avatar"/>
+
 
                     <group>
                         <group>
@@ -32,13 +34,11 @@
                             <field name="island_id"/>
                             <field name="vendor_id"
                                    options="{'no_create': True, 'no_create_edit': True}"/>
-                            <field name="image" widget="image"/>
                         </group>
 
                         <group>
                             <field name="category"/>
-                            <field name="rating"/>
-                            <field name="reviews"/>
+
                             <field name="active"/>
                         </group>
                     </group>
@@ -56,38 +56,45 @@
         <field name="name">tour.shop.kanban</field>
         <field name="model">tour.shop</field>
         <field name="arch" type="xml">
-            <kanban>
+            <kanban sample="1">
 
                 <field name="name"/>
                 <field name="image"/>
+                <field name="island_id"/>
+                <field name="vendor_id"/>
                 <field name="category"/>
-                <field name="rating"/>
 
                 <templates>
-                    <t t-name="card">
+                    <t t-name="card" class="flex-row">
 
-                        <div class="oe_kanban_global_click">
-
+                        <aside class="o_kanban_aside_full">
                             <field name="image"
-                                   widget="image"
-                                   class="oe_kanban_avatar"/>
+                                   widget="background_image"
+                                   class="d-block position-relative"/>
+                        </aside>
 
-                            <div class="mt-2">
-                                <strong>
-                                    <field name="name"/>
-                                </strong>
+                        <main class="ms-2">
+
+                            <div class="fw-bold fs-5">
+                                <field name="name"/>
                             </div>
 
                             <div>
+                                <i class="fa fa-map-marker me-2" title="Island"/>
+                                <field name="island_id"/>
+                            </div>
+
+                            <div>
+                                <i class="fa fa-building me-2" title="Vendor"/>
+                                <field name="vendor_id"/>
+                            </div>
+
+                            <div>
+                                <i class="fa fa-tag me-2" title="Category"/>
                                 <field name="category"/>
                             </div>
 
-                            <div>
-                                Rating :
-                                <field name="rating"/>
-                            </div>
-
-                        </div>
+                        </main>
 
                     </t>
                 </templates>
@@ -96,7 +103,8 @@
         </field>
     </record>
 
-    <!-- SEARCH -->
+
+
 
     <record id="view_tour_shop_search" model="ir.ui.view">
         <field name="name">tour.shop.search</field>

@@ -31,6 +31,28 @@ class TourResort(models.Model):
         'resort_id'
     )
 
+    # Amenities
+
+    sea_view = fields.Boolean(string='Sea View')
+
+    beach_access = fields.Boolean(string='Beach Access')
+
+    free_wifi = fields.Boolean(string='Free WiFi')
+
+    air_conditioning = fields.Boolean(string='Air Conditioning')
+
+    restaurant = fields.Boolean(string='Restaurant')
+
+    swimming_pool = fields.Boolean(string='Swimming Pool')
+
+    free_breakfast = fields.Boolean(string='Free Breakfast')
+
+    airport_transfer = fields.Boolean(string='Airport Transfer')
+
+    room_service = fields.Boolean(string='Room Service')
+
+    family_rooms = fields.Boolean(string='Family Rooms')
+
 
 
 

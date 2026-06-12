@@ -1,4 +1,7 @@
 <odoo>
+
+    <!-- FORM -->
+
     <record id="view_tour_resort_form" model="ir.ui.view">
         <field name="name">tour.resort.form</field>
         <field name="model">tour.resort</field>
@@ -6,14 +9,18 @@
             <form>
                 <sheet>
 
-                    <group>
-                        <group>
+                    <field name="image"
+                           widget="image"
+                           class="oe_avatar"/>
 
+                    <group>
+
+                        <group>
                             <field name="name"/>
                             <field name="island_id"/>
+
                             <field name="vendor_id"
                                    options="{'no_create': True, 'no_create_edit': True}"/>
-                            <field name="image" widget="image"/>
                         </group>
 
                         <group>
@@ -21,6 +28,7 @@
                             <field name="price_per_night"/>
                             <field name="active"/>
                         </group>
+
                     </group>
 
                     <field name="description"/>
@@ -28,10 +36,36 @@
                     <notebook>
 
                         <page string="Details">
+
                             <group>
                                 <field name="checkin_time"/>
                                 <field name="checkout_time"/>
                             </group>
+
+                        </page>
+
+                        <page string="Amenities">
+
+                            <group>
+
+                                <group>
+                                    <field name="sea_view"/>
+                                    <field name="beach_access"/>
+                                    <field name="free_wifi"/>
+                                    <field name="air_conditioning"/>
+                                    <field name="restaurant"/>
+                                </group>
+
+                                <group>
+                                    <field name="swimming_pool"/>
+                                    <field name="free_breakfast"/>
+                                    <field name="airport_transfer"/>
+                                    <field name="room_service"/>
+                                    <field name="family_rooms"/>
+                                </group>
+
+                            </group>
+
                         </page>
 
                         <page string="Bookings">
@@ -49,6 +83,7 @@
 
                                 <form>
                                     <sheet>
+
                                         <group>
                                             <field name="booking_no" readonly="1"/>
                                             <field name="customer_id"/>
@@ -57,6 +92,7 @@
                                             <field name="amount"/>
                                             <field name="state"/>
                                         </group>
+
                                     </sheet>
                                 </form>
 
@@ -70,6 +106,9 @@
             </form>
         </field>
     </record>
+
+    <!-- LIST -->
+
     <record id="view_tour_resort_list" model="ir.ui.view">
         <field name="name">tour.resort.list</field>
         <field name="model">tour.resort</field>
@@ -85,60 +124,88 @@
         </field>
     </record>
 
+    <!-- KANBAN -->
 
-<record id="view_tour_resort_kanban" model="ir.ui.view">
-    <field name="name">tour.resort.kanban</field>
-    <field name="model">tour.resort</field>
-    <field name="arch" type="xml">
-        <kanban sample="1">
-            <field name="name"/>
-            <field name="image"/>
-            <field name="island_id"/>
-            <field name="price_per_night"/>
+    <record id="view_tour_resort_kanban" model="ir.ui.view">
+        <field name="name">tour.resort.kanban</field>
+        <field name="model">tour.resort</field>
+        <field name="arch" type="xml">
 
-            <templates>
-                <t t-name="card" class="flex-row">
+            <kanban sample="1">
 
-                    <!-- Left Image -->
-                    <aside class="d-flex align-items-center me-3">
-                        <field name="image"
-                               widget="image"
-                               options="{'img_class': 'object-fit-cover rounded'}"/>
-                    </aside>
+                <field name="name"/>
+                <field name="image"/>
+                <field name="island_id"/>
+                <field name="vendor_id"/>
+                <field name="price_per_night"/>
+                <field name="room_count"/>
 
-                    <!-- Right Content -->
-                    <main class="flex-grow-1">
+                <templates>
 
-                        <div class="fw-bold fs-5">
-                            <field name="name"/>
-                        </div>
+                    <t t-name="card" class="flex-row">
 
-                        <div class="text-muted small mt-1">
-                            <i class="fa fa-map-marker me-1"/>
-                            <field name="island_id"/>
-                        </div>
+                        <aside class="o_kanban_aside_full">
 
-                        <div class="mt-2">
-                            <span class="badge bg-success">
-                                ₹ <field name="price_per_night"/>
-                                / Night
-                            </span>
-                        </div>
+                            <field name="image"
+                                   widget="background_image"
+                                   class="d-block position-relative"/>
 
-                    </main>
+                        </aside>
 
-                </t>
-            </templates>
-        </kanban>
-    </field>
-</record>
+                        <main class="ms-3">
+
+                            <div class="fw-bold fs-5">
+                                <field name="name"/>
+                            </div>
+
+                            <div class="text-muted mt-1">
+                                <i class="fa fa-map-marker me-2"/>
+                                <field name="island_id"/>
+                            </div>
+
+                            <div class="text-muted">
+                                <i class="fa fa-building me-2"/>
+                                <field name="vendor_id"/>
+                            </div>
+
+                            <div class="text-muted">
+                                <i class="fa fa-bed me-2"/>
+                                <field name="room_count"/>
+                                Rooms
+                            </div>
+
+                            <div class="mt-3">
+
+                                <span class="badge bg-success fs-6">
+                                    ₹
+                                    <field name="price_per_night"/>
+                                    / Night
+                                </span>
+
+                            </div>
+
+                        </main>
+
+                    </t>
+
+                </templates>
+
+            </kanban>
+
+        </field>
+    </record>    <!-- ACTION -->
+
     <record id="action_tour_resort" model="ir.actions.act_window">
         <field name="name">Resorts</field>
         <field name="res_model">tour.resort</field>
         <field name="view_mode">kanban,list,form</field>
     </record>
+
+    <!-- MENU -->
+
     <menuitem id="menu_tour_resort"
               name="Resorts"
               action="action_tour_resort"
               sequence="10"/>
+
 </odoo>

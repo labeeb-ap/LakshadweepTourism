@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Customer List -->
+
+    <record id="view_tour_customer_list" model="ir.ui.view">
+        <field name="name">tour.customer.list</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="email"/>
+                <field name="phone"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Customer Form -->
+
+    <record id="view_tour_customer_form" model="ir.ui.view">
+        <field name="name">tour.customer.form</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <form>
+
+                <sheet>
+
+                    <group>
+
+                        <group>
+                            <field name="name"/>
+                            <field name="email"/>
+                            <field name="phone"/>
+                        </group>
+
+                        <group>
+                            <field name="street"/>
+                            <field name="street2"/>
+                            <field name="city"/>
+                            <field name="zip"/>
+                            <field name="country_id"/>
+                        </group>
+
+                    </group>
+
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+
+    <!-- Customer Action -->
+
+    <record id="action_tour_customers" model="ir.actions.act_window">
+        <field name="name">Customers</field>
+        <field name="res_model">res.partner</field>
+        <field name="domain">[('is_customer','=',True)]</field>
+        <field name="context">{'default_is_customer': True}</field>
+        <field name="view_mode">list,form</field>
+        <field name="views" eval="[
+            (ref('view_tour_customer_list'),'list'),
+            (ref('view_tour_customer_form'),'form')
+        ]"/>
+    </record>
+    <menuitem id="menu_customers"
+              name="Customers"
+              parent="menu_lakshadweep_tourism"
+              action="action_tour_customers"
+              sequence="100"/>
+
+</odoo>

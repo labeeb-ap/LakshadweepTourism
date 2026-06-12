@@ -94,12 +94,9 @@ class PublicImageController(http.Controller):
 
 
 
-from odoo import http
-from odoo.http import request
-import base64
 
 
-class BeachHomestayImageController(http.Controller):
+
 
     @http.route(
         '/api/beach-homestay/image/<int:homestay_id>',
@@ -119,6 +116,119 @@ class BeachHomestayImageController(http.Controller):
 
         return request.make_response(
             base64.b64decode(homestay.image),
+            headers=[
+                ('Content-Type', 'image/jpeg')
+            ]
+        )
+
+
+
+
+    @http.route(
+        '/api/taxi/image/<int:taxi_id>',
+        type='http',
+        auth='public',
+        methods=['GET'],
+        csrf=False
+    )
+    def taxi_image(self, taxi_id):
+
+        taxi = request.env[
+            'tour.taxi'
+        ].sudo().browse(taxi_id)
+
+        if not taxi.exists() or not taxi.image:
+            return request.not_found()
+
+        return request.make_response(
+            base64.b64decode(taxi.image),
+            headers=[
+                ('Content-Type', 'image/jpeg')
+            ]
+        )
+
+    def water_sport_image(self, sport_id):
+
+        sport = request.env[
+            'tour.water.sport'
+        ].sudo().browse(sport_id)
+
+        if not sport.exists() or not sport.image:
+            return request.not_found()
+
+        return request.make_response(
+            base64.b64decode(sport.image),
+            headers=[
+                ('Content-Type', 'image/jpeg')
+            ]
+        )
+
+    @http.route(
+        '/api/shop/image/<int:shop_id>',
+        type='http',
+        auth='public',
+        methods=['GET'],
+        csrf=False
+    )
+    def shop_image(self, shop_id):
+
+        shop = request.env[
+            'tour.shop'
+        ].sudo().browse(shop_id)
+
+        if not shop.exists() or not shop.image:
+            return request.not_found()
+
+        return request.make_response(
+            base64.b64decode(shop.image),
+            headers=[
+                ('Content-Type', 'image/jpeg')
+            ]
+        )
+
+
+    @http.route(
+        '/api/restaurant/image/<int:restaurant_id>',
+        type='http',
+        auth='public',
+        methods=['GET'],
+        csrf=False
+    )
+    def restaurant_image(self, restaurant_id):
+
+        restaurant = request.env[
+            'tour.restaurant'
+        ].sudo().browse(restaurant_id)
+
+        if not restaurant.exists() or not restaurant.image:
+            return request.not_found()
+
+        return request.make_response(
+            base64.b64decode(restaurant.image),
+            headers=[
+                ('Content-Type', 'image/jpeg')
+            ]
+        )
+
+
+    @http.route(
+        '/api/package/image/<int:package_id>',
+        type='http',
+        auth='public',
+        methods=['GET'],
+        csrf=False
+    )
+    def package_image(self, package_id):
+
+        package = request.env[
+            'tour.package'
+        ].sudo().browse(package_id)
+
+        if not package.exists() or not package.image:
+            return request.not_found()
+
+        return request.make_response(
+            base64.b64decode(package.image),
             headers=[
                 ('Content-Type', 'image/jpeg')
             ]

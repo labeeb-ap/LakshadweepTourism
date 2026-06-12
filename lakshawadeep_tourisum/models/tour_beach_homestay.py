@@ -19,8 +19,7 @@ class TourBeachHomestay(models.Model):
         domain=[('is_vendor', '=', True)]
     )
 
-    rating = fields.Float()
-    reviews = fields.Integer()
+
 
     price_per_night = fields.Float()
 

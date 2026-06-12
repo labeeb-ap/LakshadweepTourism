@@ -18,6 +18,8 @@
         'views/tour_taxi_view.xml',
         'views/tour_restaurant_view.xml',
         'views/tour_package_view.xml',
+        'views/vendor_views.xml',
+        'views/customer_view.xml',
 
     ],
     'installable': True,
