@@ -29,30 +29,114 @@
                     <field name="description"/>
 
                     <notebook>
+                        <page string="Details">
+
+                            <group>
+                                <field name="checkin_time"/>
+                                <field name="checkout_time"/>
+                            </group>
+
+                        </page>
+                        <page string="Gallery Images">
+
+                            <field name="image_ids" mode="kanban">
+
+                                <kanban>
+                                    <field name="name"/>
+                                    <field name="image"/>
+
+                                    <templates>
+                                        <t t-name="card">
+                                            <div class="oe_kanban_global_click">
+
+                                                <div class="text-center">
+                                                    <field name="image" widget="image"/>
+                                                </div>
+
+                                                <div class="text-center mt-2">
+                                                    <strong>
+                                                        <field name="name"/>
+                                                    </strong>
+                                                </div>
+
+                                            </div>
+                                        </t>
+                                    </templates>
+
+                                </kanban>
+
+                                <form>
+                                    <sheet>
+                                        <group>
+                                            <field name="name"/>
+                                        </group>
+
+                                        <field name="image" widget="image"/>
+                                    </sheet>
+                                </form>
+
+                            </field>
+
+                        </page>
+
+                        <page string="Amenities">
+
+                            <group>
+
+                                <group>
+                                    <field name="sea_view"/>
+                                    <field name="beach_access"/>
+                                    <field name="free_wifi"/>
+                                    <field name="air_conditioning"/>
+                                    <field name="restaurant"/>
+                                </group>
+
+                                <group>
+                                    <field name="swimming_pool"/>
+                                    <field name="free_breakfast"/>
+                                    <field name="airport_transfer"/>
+                                    <field name="room_service"/>
+                                    <field name="family_rooms"/>
+                                </group>
+
+                            </group>
+
+                        </page>
 
                         <page string="Bookings">
 
-                            <field name="booking_ids">
+                            <field name="booking_ids" readonly="1">
 
                                 <list>
-                                    <field name="booking_no"/>
+                                    <field name="booking_datetime"/>
+
                                     <field name="customer_id"/>
-                                    <field name="checkin_date"/>
-                                    <field name="room_count"/>
-                                    <field name="amount"/>
+                                    <field name="check_in_date"/>
+                                    <field name="check_out_date"/>
+                                    <field name="guests"/>
+                                    <field name="rooms"/>
+                                    <field name="description"/>
+                                    <!--            <field name="amount"/>-->
                                     <field name="state"/>
                                 </list>
 
                                 <form>
                                     <sheet>
+
                                         <group>
-                                            <field name="booking_no" readonly="1"/>
-                                            <field name="customer_id"/>
-                                            <field name="checkin_date"/>
-                                            <field name="room_count"/>
-                                            <field name="amount"/>
+                                            <field name="customer_id" readonly="1"/>
+                                            <field name="check_in_date"/>
+                                            <field name="check_out_date"/>
+                                        </group>
+
+                                        <group>
+                                            <field name="guests"/>
+                                            <field name="description"/>
+                                            <field name="rooms"/>
+                                            <!--                    <field name="amount"/>-->
                                             <field name="state"/>
                                         </group>
+
                                     </sheet>
                                 </form>
 
@@ -74,6 +158,7 @@
         <field name="model">tour.beach.homestay</field>
         <field name="arch" type="xml">
             <list>
+
                 <field name="name"/>
                 <field name="island_id"/>
                 <field name="vendor_id"/>

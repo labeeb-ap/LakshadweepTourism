@@ -233,3 +233,78 @@ class PublicImageController(http.Controller):
                 ('Content-Type', 'image/jpeg')
             ]
         )
+
+
+
+
+    @http.route(
+        '/api/resort/gallery/image/<int:image_id>',
+        type='http',
+        auth='public',
+        methods=['GET'],
+        csrf=False
+    )
+    def resort_gallery_image(self, image_id):
+
+        image = request.env[
+            'tour.resort.image'
+        ].sudo().browse(image_id)
+
+        if not image.exists() or not image.image:
+            return request.not_found()
+
+        return request.make_response(
+            base64.b64decode(image.image),
+            headers=[
+                ('Content-Type', 'image/jpeg')
+            ]
+        )
+
+    @http.route(
+        '/api/beach-homestay/gallery/image/<int:image_id>',
+        type='http',
+        auth='public',
+        methods=['GET'],
+        csrf=False
+    )
+    def beach_homestay_gallery_image(self, image_id):
+
+        image = request.env[
+            'tour.beach.homestay.image'
+        ].sudo().browse(image_id)
+
+        if not image.exists() or not image.image:
+            return request.not_found()
+
+        return request.make_response(
+            base64.b64decode(image.image),
+            headers=[
+                ('Content-Type', 'image/jpeg')
+            ]
+        )
+
+
+
+
+    @http.route(
+        '/api/homestay/gallery/image/<int:image_id>',
+        type='http',
+        auth='public',
+        methods=['GET'],
+        csrf=False
+    )
+    def homestay_gallery_image(self, image_id):
+
+        image = request.env[
+            'tour.homestay.image'
+        ].sudo().browse(image_id)
+
+        if not image.exists() or not image.image:
+            return request.not_found()
+
+        return request.make_response(
+            base64.b64decode(image.image),
+            headers=[
+                ('Content-Type', 'image/jpeg')
+            ]
+        )

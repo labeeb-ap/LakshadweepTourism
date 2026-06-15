@@ -43,7 +43,51 @@
                             </group>
 
                         </page>
+                        <page string="Gallery Images">
 
+                            <field name="image_ids" mode="kanban">
+
+                                <kanban>
+                                    <field name="name"/>
+                                    <field name="image"/>
+
+                                    <templates>
+                                        <t t-name="card">
+                                            <div class="oe_kanban_global_click">
+
+                                                <div class="text-center">
+                                                    <field name="image" widget="image"/>
+                                                </div>
+
+                                                <div class="text-center mt-2">
+                                                    <strong>
+                                                        <field name="name"/>
+                                                    </strong>
+                                                </div>
+
+                                            </div>
+                                        </t>
+                                    </templates>
+
+                                </kanban>
+
+                                <form>
+                                    <sheet>
+
+                                        <group>
+                                            <field name="name"/>
+                                        </group>
+
+                                        <field name="image"
+                                               widget="image"
+                                        />
+
+                                    </sheet>
+                                </form>
+
+                            </field>
+
+                        </page>
                         <page string="Amenities">
 
                             <group>
@@ -70,14 +114,18 @@
 
                         <page string="Bookings">
 
-                            <field name="booking_ids">
+                            <field name="booking_ids" readonly="1">
 
                                 <list>
-                                    <field name="booking_no"/>
+                                    <field name="booking_datetime"/>
+
                                     <field name="customer_id"/>
-                                    <field name="checkin_date"/>
-                                    <field name="room_count"/>
-                                    <field name="amount"/>
+                                    <field name="check_in_date"/>
+                                    <field name="check_out_date"/>
+                                    <field name="guests"/>
+                                    <field name="rooms"/>
+                                    <field name="description"/>
+                                    <!--            <field name="amount"/>-->
                                     <field name="state"/>
                                 </list>
 
@@ -85,11 +133,16 @@
                                     <sheet>
 
                                         <group>
-                                            <field name="booking_no" readonly="1"/>
-                                            <field name="customer_id"/>
-                                            <field name="checkin_date"/>
-                                            <field name="room_count"/>
-                                            <field name="amount"/>
+                                            <field name="customer_id" readonly="1"/>
+                                            <field name="check_in_date"/>
+                                            <field name="check_out_date"/>
+                                        </group>
+
+                                        <group>
+                                            <field name="guests"/>
+                                            <field name="description"/>
+                                            <field name="rooms"/>
+                                            <!--                    <field name="amount"/>-->
                                             <field name="state"/>
                                         </group>
 
@@ -99,7 +152,6 @@
                             </field>
 
                         </page>
-
                     </notebook>
 
                 </sheet>

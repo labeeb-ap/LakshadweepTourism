@@ -8,6 +8,11 @@ class TourResort(models.Model):
     name = fields.Char(required=True)
     island_id = fields.Many2one('tour.island', required=True)
     image = fields.Binary()
+    image_ids = fields.One2many(
+        'tour.resort.image',
+        'resort_id',
+        string='Gallery Images'
+    )
 
     vendor_id = fields.Many2one(
         'res.partner',
@@ -63,51 +68,83 @@ class TourResort(models.Model):
 from odoo import models, fields, api
 
 
+from odoo import models, fields
+
+
 class TourResortBooking(models.Model):
     _name = 'tour.resort.booking'
     _description = 'Resort Booking'
-    _rec_name = 'booking_no'
-
-    booking_no = fields.Char(
-        string='Booking Number',
-        default='New',
-        readonly=True
-    )
+    _order = 'id desc'
 
     resort_id = fields.Many2one(
         'tour.resort',
-        required=True
+        required=True,
+        ondelete='cascade'
     )
 
     customer_id = fields.Many2one(
         'res.partner',
+        required=True,
+        readonly=True
+    )
+
+    check_in_date = fields.Date(
         required=True
     )
 
-    checkin_date = fields.Date(required=True)
+    check_out_date = fields.Date(
+        required=True
+    )
 
+    guests = fields.Integer(
+        default=1,
+        required=True
+    )
 
-
-    room_count = fields.Integer(default=1)
+    rooms = fields.Integer(
+        default=1,
+        required=True
+    )
+    description = fields.Text(
+        string='Description'
+    )
 
     amount = fields.Float()
 
     state = fields.Selection([
-        ('draft', 'Draft'),
-        ('requested', 'Requested'),
-        ('confirmed', 'Confirmed'),
-        ('completed', 'Completed'),
+        ('booked', 'Booked'),
         ('cancelled', 'Cancelled')
-    ], default='draft')
+    ], default='booked', required=True)
 
-    @api.model
-    def create(self, vals):
-        if vals.get('booking_no', 'New') == 'New':
-            vals['booking_no'] = self.env[
-                'ir.sequence'
-            ].next_by_code(
-                'tour.resort.booking'
-            ) or 'New'
+    booking_datetime = fields.Datetime(
+        string='Booking Time',
+        default=fields.Datetime.now,
+        readonly=True
+    )
 
-        return super().create(vals)
+
+
+
+
+
+
+from odoo import models, fields
+
+class TourResortImage(models.Model):
+    _name = 'tour.resort.image'
+    _description = 'Resort Gallery Image'
+
+    resort_id = fields.Many2one(
+        'tour.resort',
+        string='Resort',
+        required=True,
+        ondelete='cascade'
+    )
+
+    name = fields.Char()
+
+    image = fields.Image(
+        string='Image',
+        required=True
+    )
 

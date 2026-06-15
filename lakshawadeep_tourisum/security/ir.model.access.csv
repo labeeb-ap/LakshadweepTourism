@@ -15,3 +15,6 @@ access_tour_cuisine_user,tour.cuisine.user,model_tour_cuisine,base.group_user,1,
 access_tour_restaurant_user,tour.restaurant.user,model_tour_restaurant,base.group_user,1,1,1,1
 access_tour_package_user,tour.package.user,model_tour_package,base.group_user,1,1,1,1
 access_tour_package_booking_user,tour.package.booking.user,model_tour_package_booking,base.group_user,1,1,1,1
+access_tour_resort_image_user,tour.resort.image.user,model_tour_resort_image,base.group_user,1,1,1,1
+access_tour_beach_homestay_image,tour.beach.homestay.image,model_tour_beach_homestay_image,base.group_user,1,1,1,1
+access_tour_homestay_image,tour.homestay.image,model_tour_homestay_image,base.group_user,1,1,1,1
