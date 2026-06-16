@@ -82,3 +82,90 @@ class TaxiController(http.Controller):
             'message': 'Taxi services fetched successfully',
             'data': data
         })
+
+
+
+
+    @http.route(
+        '/api/taxi/<int:taxi_id>',
+        type='http',
+        auth='public',
+        methods=['GET'],
+        csrf=False
+    )
+    def taxi_detail(self, taxi_id, **kwargs):
+
+        payload = verify_token()
+
+        if not payload:
+            return request.make_json_response(
+                {
+                    'success': False,
+                    'message': 'Invalid or expired token'
+                },
+                status=401
+            )
+
+        taxi = request.env[
+            'tour.taxi'
+        ].sudo().search(
+            [
+                ('id', '=', taxi_id),
+                ('active', '=', True)
+            ],
+            limit=1
+        )
+
+        if not taxi:
+            return request.make_json_response(
+                {
+                    'success': False,
+                    'message': 'Taxi not found'
+                },
+                status=404
+            )
+
+        base_url = request.env[
+            'ir.config_parameter'
+        ].sudo().get_param(
+            'web.base.url'
+        )
+
+        image_url = False
+
+        if taxi.image:
+            image_url = (
+                f"{base_url}/api/taxi/image/{taxi.id}"
+            )
+
+        features = []
+
+        for feature in taxi.feature_ids:
+            features.append({
+                'id': feature.id,
+                'name': feature.name
+            })
+
+        return request.make_json_response({
+            'success': True,
+            'message': 'Taxi details fetched successfully',
+            'data': {
+                'id': taxi.id,
+                'name': taxi.name,
+
+                'island_id': taxi.island_id.id,
+                'island_code': taxi.island_id.code,
+                'island_name': taxi.island_id.name,
+
+                'image': image_url,
+
+                'vehicle_type': taxi.vehicle_type or '',
+                'seater': taxi.seater,
+                'ac': taxi.ac,
+
+                'description': taxi.description or '',
+
+                'features': features
+            }
+        })
+

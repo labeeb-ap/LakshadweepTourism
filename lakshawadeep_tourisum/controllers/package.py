@@ -81,3 +81,96 @@ class PackageController(http.Controller):
             'message': 'Packages fetched successfully',
             'data': data
         })
+
+
+
+
+
+
+
+    @http.route(
+        '/api/package/<int:package_id>',
+        type='http',
+        auth='public',
+        methods=['GET'],
+        csrf=False
+    )
+    def package_detail(self, package_id, **kwargs):
+
+        payload = verify_token()
+
+        if not payload:
+            return request.make_json_response(
+                {
+                    'success': False,
+                    'message': 'Invalid or expired token'
+                },
+                status=401
+            )
+
+        package = request.env[
+            'tour.package'
+        ].sudo().search(
+            [
+                ('id', '=', package_id),
+                ('active', '=', True)
+            ],
+            limit=1
+        )
+
+        if not package:
+            return request.make_json_response(
+                {
+                    'success': False,
+                    'message': 'Package not found'
+                },
+                status=404
+            )
+
+        base_url = request.env[
+            'ir.config_parameter'
+        ].sudo().get_param(
+            'web.base.url'
+        )
+
+        image_url = False
+
+        if package.image:
+            image_url = (
+                f"{base_url}/api/package/image/{package.id}"
+            )
+
+        services = []
+
+        for service in package.service_ids:
+            services.append({
+                'id': service.id,
+                'name': service.name
+            })
+
+        return request.make_json_response({
+            'success': True,
+            'message': 'Package details fetched successfully',
+            'data': {
+                'id': package.id,
+                'name': package.name,
+
+                'island_id': package.island_id.id,
+                'island_code': package.island_id.code,
+                'island_name': package.island_id.name,
+
+                'image': image_url,
+
+                'duration': package.duration or '',
+                'price': package.price,
+
+                'description': package.description or '',
+
+                'services': services
+            }
+        })
+
+
+
+
+

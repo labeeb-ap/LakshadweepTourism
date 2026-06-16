@@ -49,6 +49,33 @@ class TourTaxi(models.Model):
         'tour.taxi.booking',
         'taxi_id'
     )
+    feature_ids = fields.Many2many(
+        'tour.taxi.feature',
+        string='Vehicle Features'
+    )
+
+
+
+
+
+
+
+
+
+
+
+
+class TourTaxiFeature(models.Model):
+    _name = 'tour.taxi.feature'
+    _description = 'Taxi Feature'
+
+    name = fields.Char(
+        required=True
+    )
+
+    active = fields.Boolean(
+        default=True
+    )
 
 
 
@@ -65,12 +92,8 @@ from odoo import models, fields, api
 class TourTaxiBooking(models.Model):
     _name = 'tour.taxi.booking'
     _description = 'Taxi Booking'
-    _rec_name = 'booking_no'
 
-    booking_no = fields.Char(
-        default='New',
-        readonly=True
-    )
+
 
     taxi_id = fields.Many2one(
         'tour.taxi',
@@ -91,26 +114,22 @@ class TourTaxiBooking(models.Model):
     drop_location = fields.Char()
 
     passengers = fields.Integer(
-        default=1
     )
 
-    amount = fields.Float()
+    description = fields.Text(
+        string='Description'
+    )
 
     state = fields.Selection([
-        ('draft', 'Draft'),
-        ('requested', 'Requested'),
-        ('confirmed', 'Confirmed'),
-        ('completed', 'Completed'),
+        ('booked', 'Booked'),
         ('cancelled', 'Cancelled')
-    ], default='draft')
+    ], default='booked', required=True)
 
-    @api.model
-    def create(self, vals):
-        if vals.get('booking_no', 'New') == 'New':
-            vals['booking_no'] = self.env[
-                'ir.sequence'
-            ].next_by_code(
-                'tour.taxi.booking'
-            ) or 'New'
+    booking_datetime = fields.Datetime(
+        string='Booking Time',
+        default=fields.Datetime.now,
+        readonly=True
+    )
 
-        return super().create(vals)
+
+

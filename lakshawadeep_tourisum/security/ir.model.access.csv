@@ -18,3 +18,7 @@ access_tour_package_booking_user,tour.package.booking.user,model_tour_package_bo
 access_tour_resort_image_user,tour.resort.image.user,model_tour_resort_image,base.group_user,1,1,1,1
 access_tour_beach_homestay_image,tour.beach.homestay.image,model_tour_beach_homestay_image,base.group_user,1,1,1,1
 access_tour_homestay_image,tour.homestay.image,model_tour_homestay_image,base.group_user,1,1,1,1
+access_tour_package_service_user,tour.package.service,model_tour_package_service,base.group_user,1,1,1,1
+access_tour_water_sport_include_user,tour.water.sport.include,model_tour_water_sport_include,base.group_user,1,1,1,1
+access_tour_water_sport_image_user,tour.water.sport.image,model_tour_water_sport_image,base.group_user,1,1,1,1
+access_tour_taxi_feature_user,tour.taxi.feature,model_tour_taxi_feature,base.group_user,1,1,1,1

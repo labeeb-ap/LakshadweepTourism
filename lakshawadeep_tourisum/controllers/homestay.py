@@ -71,8 +71,7 @@ class HomestayController(http.Controller):
                 'island_id': homestay.island_id.code,
                 'island_name': homestay.island_id.name,
                 'image': image_url,
-                'rating': homestay.rating,
-                'reviews': homestay.reviews,
+
                 'price': homestay.price_per_night,
                 'description': homestay.description or '',
             })

@@ -308,3 +308,55 @@ class PublicImageController(http.Controller):
                 ('Content-Type', 'image/jpeg')
             ]
         )
+
+
+
+    @http.route(
+        '/api/water-sport/gallery/image/<int:image_id>',
+        type='http',
+        auth='public',
+        methods=['GET'],
+        csrf=False
+    )
+    def water_sport_gallery_image(self, image_id):
+
+        image = request.env[
+            'tour.water.sport.image'
+        ].sudo().browse(image_id)
+
+        if not image.exists() or not image.image:
+            return request.not_found()
+
+        return request.make_response(
+            base64.b64decode(image.image),
+            headers=[
+                ('Content-Type', 'image/jpeg')
+            ]
+        )
+
+
+
+    @http.route(
+        '/api/water-sport/image/<int:water_sport_id>',
+        type='http',
+        auth='public',
+        methods=['GET'],
+        csrf=False
+    )
+    def water_sport_image(self, water_sport_id):
+
+        water_sport = request.env[
+            'tour.water.sport'
+        ].sudo().browse(
+            water_sport_id
+        )
+
+        if not water_sport.exists() or not water_sport.image:
+            return request.not_found()
+
+        return request.make_response(
+            base64.b64decode(water_sport.image),
+            headers=[
+                ('Content-Type', 'image/jpeg')
+            ]
+        )

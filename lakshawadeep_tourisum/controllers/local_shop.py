@@ -71,8 +71,6 @@ class ShopController(http.Controller):
                 'island_id': shop.island_id.code,
                 'island_name': shop.island_id.name,
                 'image': image_url,
-                'rating': shop.rating,
-                'reviews': shop.reviews,
                 'category': shop.category,
                 'description': shop.description or '',
             })

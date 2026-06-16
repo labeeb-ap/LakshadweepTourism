@@ -2,70 +2,79 @@
 
     <!-- FORM -->
 
-    <record id="view_tour_taxi_form" model="ir.ui.view">
+    <record id="view_taxi_form" model="ir.ui.view">
         <field name="name">tour.taxi.form</field>
         <field name="model">tour.taxi</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>
-                    <field name="image" widget="image" class="oe_avatar"/>
 
+                    <field name="image"
+                           widget="image"
+                           class="oe_avatar"/>
 
                     <group>
                         <group>
                             <field name="name"/>
+
                             <field name="island_id"/>
+
                             <field name="vendor_id"
                                    options="{'no_create': True, 'no_create_edit': True}"/>
+
+                            <field name="vehicle_type"/>
+
+                            <field name="active"/>
                         </group>
 
                         <group>
-                            <field name="vehicle_type"/>
                             <field name="seater"/>
+
                             <field name="ac"/>
-                            <field name="active"/>
+                            <field name="feature_ids"
+                                   widget="many2many_tags"/>
+
                         </group>
                     </group>
 
-                    <field name="description"/>
-
                     <notebook>
+
+                        <page string="Description">
+
+                            <field name="description"
+                                   placeholder="Taxi description..."/>
+
+                        </page>
 
                         <page string="Bookings">
 
-                            <field name="booking_ids">
+                            <field name="booking_ids" readonly="1">
 
                                 <list>
-                                    <field name="booking_no"/>
                                     <field name="customer_id"/>
                                     <field name="booking_date"/>
                                     <field name="pickup_location"/>
                                     <field name="drop_location"/>
                                     <field name="passengers"/>
-                                    <field name="amount"/>
-                                    <field name="state"/>
                                 </list>
 
                                 <form>
                                     <sheet>
-
                                         <group>
-                                            <field name="booking_no" readonly="1"/>
+
                                             <field name="customer_id"/>
+
                                             <field name="booking_date"/>
-                                        </group>
 
-                                        <group>
                                             <field name="pickup_location"/>
+
                                             <field name="drop_location"/>
+
                                             <field name="passengers"/>
-                                        </group>
 
-                                        <group>
-                                            <field name="amount"/>
-                                            <field name="state"/>
-                                        </group>
+                                            <field name="description"/>
 
+                                        </group>
                                     </sheet>
                                 </form>
 
@@ -79,7 +88,6 @@
             </form>
         </field>
     </record>
-
     <!-- LIST -->
 
     <record id="view_tour_taxi_list" model="ir.ui.view">
