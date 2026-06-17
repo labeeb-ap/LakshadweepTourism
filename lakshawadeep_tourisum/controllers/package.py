@@ -140,10 +140,10 @@ class PackageController(http.Controller):
                 f"{base_url}/api/package/image/{package.id}"
             )
 
-        services = []
+        includes = []
 
         for service in package.service_ids:
-            services.append({
+            includes.append({
                 'id': service.id,
                 'name': service.name
             })
@@ -166,7 +166,7 @@ class PackageController(http.Controller):
 
                 'description': package.description or '',
 
-                'services': services
+                'includes': includes
             }
         })
 

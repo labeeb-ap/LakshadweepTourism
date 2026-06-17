@@ -1,5 +1,53 @@
 <odoo>
 
+    <!-- SEARCH VIEW -->
+
+<record id="view_homestay_search" model="ir.ui.view">
+    <field name="name">tour.homestay.search</field>
+    <field name="model">tour.homestay</field>
+    <field name="arch" type="xml">
+        <search>
+
+            <field name="name"/>
+            <field name="island_id"/>
+            <field name="vendor_id"/>
+
+            <filter name="active_filter"
+                    string="Active"
+                    domain="[('active','=',True)]"/>
+
+            <filter name="agatti"
+                    string="Agatti"
+                    domain="[('island_id.name','=','Agatti')]"/>
+
+            <filter name="kavaratti"
+                    string="Kavaratti"
+                    domain="[('island_id.name','=','Kavaratti')]"/>
+
+            <filter name="kalpeni"
+                    string="Kalpeni"
+                    domain="[('island_id.name','=','Kalpeni')]"/>
+
+            <filter name="kadamath"
+                    string="Kadamath"
+                    domain="[('island_id.name','=','Kadamath')]"/>
+
+            <group expand="0" string="Group By">
+
+                <filter name="group_island"
+                        string="Island"
+                        context="{'group_by':'island_id'}"/>
+
+                <filter name="group_vendor"
+                        string="Vendor"
+                        context="{'group_by':'vendor_id'}"/>
+
+            </group>
+
+        </search>
+    </field>
+</record>
+
     <!-- FORM VIEW -->
 
     <record id="view_tour_homestay_form" model="ir.ui.view">
@@ -241,6 +289,7 @@
         <field name="name">Homestays</field>
         <field name="res_model">tour.homestay</field>
         <field name="view_mode">kanban,list,form</field>
+         <field name="search_view_id" ref="view_homestay_search"/>
     </record>
 
     <!-- MENU -->

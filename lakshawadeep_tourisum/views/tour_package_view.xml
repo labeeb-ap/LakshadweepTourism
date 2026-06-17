@@ -165,17 +165,60 @@
         </field>
     </record>
 
-    <record id="seq_package_booking" model="ir.sequence">
-        <field name="name">Package Booking</field>
-        <field name="code">tour.package.booking</field>
-        <field name="prefix">PKG/</field>
-        <field name="padding">5</field>
+
+    <record id="view_package_search" model="ir.ui.view">
+        <field name="name">tour.package.search</field>
+        <field name="model">tour.package</field>
+        <field name="arch" type="xml">
+            <search>
+
+                <field name="name"/>
+                <field name="island_id"/>
+                <field name="vendor_id"/>
+
+                <filter name="active_filter"
+                        string="Active"
+                        domain="[('active','=',True)]"/>
+
+                 <filter name="agatti"
+                            string="Agatti"
+                            domain="[('island_id.name','=','Agatti')]"/>
+
+                    <filter name="kavaratti"
+                            string="Kavaratti"
+                            domain="[('island_id.name','=','Kavaratti')]"/>
+
+                    <filter name="kalpeni"
+                            string="Kalpeni"
+                            domain="[('island_id.name','=','Kalpeni')]"/>
+
+                    <filter name="kadamath"
+                            string="Kadamath"
+                            domain="[('island_id.name','=','Kadamath')]"/>
+
+                <group expand="0" string="Group By">
+
+                    <filter name="group_island"
+                            string="Island"
+                            context="{'group_by':'island_id'}"/>
+
+                    <filter name="group_vendor"
+                            string="Vendor"
+                            context="{'group_by':'vendor_id'}"/>
+
+                </group>
+
+            </search>
+        </field>
     </record>
+
 
     <record id="action_package" model="ir.actions.act_window">
         <field name="name">Tour Packages</field>
         <field name="res_model">tour.package</field>
         <field name="view_mode">kanban,list,form</field>
+        <field name="search_view_id" ref="view_package_search"/>
+
     </record>
 
     <menuitem id="menu_package"

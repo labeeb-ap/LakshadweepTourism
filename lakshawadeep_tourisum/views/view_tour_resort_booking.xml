@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ===================================================== -->
+    <!-- SEARCH VIEW -->
+    <!-- ===================================================== -->
+
+    <record id="view_tour_resort_booking_search" model="ir.ui.view">
+        <field name="name">tour.resort.booking.search</field>
+        <field name="model">tour.resort.booking</field>
+        <field name="arch" type="xml">
+            <search>
+
+                <field name="customer_id"/>
+                <field name="resort_id"/>
+
+                <filter string="Draft"
+                        name="draft"
+                        domain="[('state','=','draft')]"/>
+
+                <filter string="Confirmed"
+                        name="confirmed"
+                        domain="[('state','=','confirmed')]"/>
+
+                <filter string="Cancelled"
+                        name="cancelled"
+                        domain="[('state','=','cancelled')]"/>
+
+                <group expand="0" string="Group By">
+
+                    <filter string="Resort"
+                            name="group_resort"
+                            context="{'group_by':'resort_id'}"/>
+
+                    <filter string="Customer"
+                            name="group_customer"
+                            context="{'group_by':'customer_id'}"/>
+
+                    <filter string="State"
+                            name="group_state"
+                            context="{'group_by':'state'}"/>
+
+                </group>
+
+            </search>
+        </field>
+    </record>
+
+
+    <!-- ===================================================== -->
+    <!-- LIST VIEW -->
+    <!-- ===================================================== -->
+
+    <record id="view_tour_resort_booking_list" model="ir.ui.view">
+        <field name="name">tour.resort.booking.list</field>
+        <field name="model">tour.resort.booking</field>
+        <field name="arch" type="xml">
+            <list>
+
+                <field name="booking_datetime"/>
+
+                <field name="resort_id"/>
+
+                <field name="customer_id"/>
+
+                <field name="check_in_date"/>
+
+                <field name="check_out_date"/>
+
+                <field name="guests"/>
+
+                <field name="rooms"/>
+
+                <field name="state"/>
+
+            </list>
+        </field>
+    </record>
+
+
+    <!-- ===================================================== -->
+    <!-- FORM VIEW -->
+    <!-- ===================================================== -->
+
+    <record id="view_tour_resort_booking_form" model="ir.ui.view">
+        <field name="name">tour.resort.booking.form</field>
+        <field name="model">tour.resort.booking</field>
+        <field name="arch" type="xml">
+            <form>
+
+                <header>
+
+                    <field name="state"
+                           widget="statusbar"
+                           statusbar_visible="draft,confirmed,cancelled"/>
+
+                </header>
+
+                <sheet>
+
+                    <group>
+
+                        <group>
+
+                            <field name="resort_id"/>
+
+                            <field name="customer_id"/>
+
+                            <field name="booking_datetime"
+                                   readonly="1"/>
+
+                        </group>
+
+                        <group>
+
+                            <field name="check_in_date"/>
+
+                            <field name="check_out_date"/>
+
+                            <field name="guests"/>
+
+                            <field name="rooms"/>
+
+                        </group>
+
+                    </group>
+
+                    <group>
+                        <field name="description"/>
+                    </group>
+
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+
+
+    <!-- ===================================================== -->
+    <!-- ACTION -->
+    <!-- ===================================================== -->
+
+<record id="action_tour_resort_booking"
+        model="ir.actions.act_window">
+
+    <field name="name">Resort Bookings</field>
+    <field name="res_model">tour.resort.booking</field>
+    <field name="view_mode">list,form</field>
+    <field name="search_view_id"
+           ref="view_tour_resort_booking_search"/>
+
+</record>
+
+    <!-- ===================================================== -->
+    <!-- MENU -->
+    <!-- ===================================================== -->
+
+    <menuitem id="menu_tour_resort_booking"
+              name="Bookings"
+              parent="menu_tour_resort"
+              action="action_tour_resort_booking"
+              sequence="20"/>
+
+</odoo>

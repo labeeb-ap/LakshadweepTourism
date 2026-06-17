@@ -82,12 +82,7 @@ class RestaurantController(http.Controller):
             'data': data
         })
 
-from odoo import http
-from odoo.http import request
 
-from ..utils.jwt_helper import verify_token
-
-class RestaurantController(http.Controller):
 
     @http.route(
         '/api/restaurant/<int:restaurant_id>',

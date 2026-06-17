@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- SEARCH VIEW -->
+
+    <record id="view_package_booking_search" model="ir.ui.view">
+        <field name="name">tour.package.booking.search</field>
+        <field name="model">tour.package.booking</field>
+        <field name="arch" type="xml">
+            <search>
+
+                <field name="package_id"/>
+                <field name="customer_id"/>
+
+                <filter name="draft"
+                        string="Draft"
+                        domain="[('state','=','draft')]"/>
+
+                <filter name="confirmed"
+                        string="Confirmed"
+                        domain="[('state','=','confirmed')]"/>
+
+                <filter name="cancelled"
+                        string="Cancelled"
+                        domain="[('state','=','cancelled')]"/>
+
+                <group expand="0" string="Group By">
+
+                    <filter name="group_package"
+                            string="Package"
+                            context="{'group_by':'package_id'}"/>
+
+                    <filter name="group_customer"
+                            string="Customer"
+                            context="{'group_by':'customer_id'}"/>
+
+                    <filter name="group_state"
+                            string="Status"
+                            context="{'group_by':'state'}"/>
+
+                </group>
+
+            </search>
+        </field>
+    </record>
+
+    <!-- LIST VIEW -->
+
+    <record id="view_package_booking_list" model="ir.ui.view">
+        <field name="name">tour.package.booking.list</field>
+        <field name="model">tour.package.booking</field>
+        <field name="arch" type="xml">
+            <list>
+
+                <field name="booking_datetime"/>
+
+                <field name="package_id"/>
+
+                <field name="customer_id"/>
+
+                <field name="travel_date"/>
+
+                <field name="persons"/>
+
+                <field name="state"/>
+
+            </list>
+        </field>
+    </record>
+
+    <!-- FORM VIEW -->
+
+    <record id="view_package_booking_form" model="ir.ui.view">
+        <field name="name">tour.package.booking.form</field>
+        <field name="model">tour.package.booking</field>
+        <field name="arch" type="xml">
+
+            <form>
+
+                <header>
+
+                    <field name="state"
+                           widget="statusbar"
+                           statusbar_visible="draft,confirmed,cancelled"/>
+
+                </header>
+
+                <sheet>
+
+                    <group>
+
+                        <group>
+
+                            <field name="package_id"/>
+
+                            <field name="customer_id"/>
+
+                            <field name="booking_datetime"
+                                   readonly="1"/>
+
+                        </group>
+
+                        <group>
+
+                            <field name="travel_date"/>
+
+                            <field name="persons"/>
+
+                        </group>
+
+                    </group>
+
+                    <group>
+
+                        <field name="description"/>
+
+                    </group>
+
+                </sheet>
+
+            </form>
+
+        </field>
+    </record>
+
+    <!-- ACTION -->
+
+    <record id="action_package_booking"
+            model="ir.actions.act_window">
+
+        <field name="name">Package Bookings</field>
+
+        <field name="res_model">tour.package.booking</field>
+
+        <field name="view_mode">list,form</field>
+
+        <field name="search_view_id"
+               ref="view_package_booking_search"/>
+
+    </record>
+
+    <!-- MENU -->
+
+    <menuitem id="menu_package_booking"
+              name="Bookings"
+              parent="menu_package"
+              action="action_package_booking"
+              sequence="80"/>
+
+</odoo>

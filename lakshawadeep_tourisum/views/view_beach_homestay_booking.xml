@@ -1,0 +1,162 @@
+<odoo>
+
+    <!-- SEARCH -->
+
+    <record id="view_beach_homestay_booking_search" model="ir.ui.view">
+        <field name="name">tour.beach.homestay.booking.search</field>
+        <field name="model">tour.beach.homestay.booking</field>
+        <field name="arch" type="xml">
+            <search>
+
+                <field name="customer_id"/>
+                <field name="homestay_id"/>
+
+                <separator/>
+
+                <filter name="draft_filter"
+                        string="Draft"
+                        domain="[('state','=','draft')]"/>
+
+                <filter name="confirmed_filter"
+                        string="Confirmed"
+                        domain="[('state','=','confirmed')]"/>
+
+                <filter name="cancelled_filter"
+                        string="Cancelled"
+                        domain="[('state','=','cancelled')]"/>
+
+                <group string="Group By">
+
+                    <filter name="group_homestay"
+                            string="Homestay"
+                            context="{'group_by':'homestay_id'}"/>
+
+                    <filter name="group_customer"
+                            string="Customer"
+                            context="{'group_by':'customer_id'}"/>
+
+                    <filter name="group_state"
+                            string="State"
+                            context="{'group_by':'state'}"/>
+
+                </group>
+
+            </search>
+        </field>
+    </record>
+
+    <!-- LIST -->
+
+    <record id="view_beach_homestay_booking_list" model="ir.ui.view">
+        <field name="name">tour.beach.homestay.booking.list</field>
+        <field name="model">tour.beach.homestay.booking</field>
+        <field name="arch" type="xml">
+            <list>
+
+
+                <field name="booking_datetime"/>
+
+                <field name="homestay_id"/>
+
+                <field name="customer_id"/>
+
+                <field name="check_in_date"/>
+
+                <field name="check_out_date"/>
+
+                <field name="guests"/>
+
+                <field name="rooms"/>
+
+                <field name="state"/>
+
+            </list>
+        </field>
+    </record>
+
+
+    <!-- FORM -->
+
+    <record id="view_beach_homestay_booking_form" model="ir.ui.view">
+        <field name="name">tour.beach.homestay.booking.form</field>
+        <field name="model">tour.beach.homestay.booking</field>
+        <field name="arch" type="xml">
+
+            <form>
+
+                <header>
+
+                    <field name="state"
+                           widget="statusbar"
+                           statusbar_visible="draft,confirmed,cancelled"/>
+
+                </header>
+
+                <sheet>
+
+                    <group>
+
+                        <group>
+
+
+                            <field name="homestay_id"/>
+
+                            <field name="customer_id"/>
+
+                            <field name="booking_datetime"
+                                   readonly="1"/>
+
+                        </group>
+
+                        <group>
+
+                            <field name="check_in_date"/>
+
+                            <field name="check_out_date"/>
+
+                            <field name="guests"/>
+
+                            <field name="rooms"/>
+
+                        </group>
+
+                    </group>
+
+                    <group>
+                        <field name="description"/>
+                    </group>
+
+                </sheet>
+
+            </form>
+
+        </field>
+    </record>
+
+
+    <!-- ACTION -->
+
+    <record id="action_beach_homestay_booking"
+            model="ir.actions.act_window">
+
+        <field name="name">Homestay Bookings</field>
+
+        <field name="res_model">tour.beach.homestay.booking</field>
+
+        <field name="view_mode">list,form</field>
+
+        <field name="search_view_id"
+               ref="view_beach_homestay_booking_search"/>
+
+    </record>
+
+
+    <!-- MENU -->
+
+    <menuitem id="menu_beach_homestay_booking"
+              name="Bookings"
+              parent="menu_beach_homestay"
+              action="action_beach_homestay_booking"
+              sequence="30"/>
+
+</odoo>

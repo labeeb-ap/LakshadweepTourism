@@ -20,6 +20,12 @@
         'views/tour_package_view.xml',
         'views/vendor_views.xml',
         'views/customer_view.xml',
+        'views/view_tour_resort_booking.xml',
+        'views/view_beach_homestay_booking.xml',
+        'views/view_homestay_booking.xml',
+        'views/view_package_booking.xml',
+        'views/view_water_sport_booking.xml',
+        'views/view_taxi_booking.xml',
 
     ],
     'installable': True,
